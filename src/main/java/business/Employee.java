@@ -1,6 +1,7 @@
 package business;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Employee implements GreetablePerson {
     private final String name;
@@ -8,9 +9,9 @@ public class Employee implements GreetablePerson {
     private final String email;
     private final String lastName;
 
-    public Employee(String name, LocalDate dateOfBirth, String email) {
-        this.name = name.split("\\,")[0];
-        this.lastName = name.split("\\,")[1].trim();
+    public Employee(String name, String lastName, LocalDate dateOfBirth, String email) {
+        this.name = name;
+        this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
     }

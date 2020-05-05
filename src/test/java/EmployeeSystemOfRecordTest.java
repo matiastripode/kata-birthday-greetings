@@ -30,7 +30,7 @@ public class EmployeeSystemOfRecordTest {
     @Test
     public void test01_whenSORHasAnEmployeeItCanReturnHerByEmail() {
         EmployeeSystemOfRecord employeeSOR = new EmployeeSystemOfRecord(this.testObjects.dbSystemReturnTwoEmployees());
-        Employee maryAnn = new Employee("Mary, Ann",
+        Employee maryAnn = new Employee("Mary", "Ann",
                 LocalDate.of(1975, Month.SEPTEMBER, 10),
                 "mary.ann@foobar.com");
         try {

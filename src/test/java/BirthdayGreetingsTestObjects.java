@@ -39,8 +39,19 @@ public class BirthdayGreetingsTestObjects {
     public List<GreetablePerson> twoEmployeesBornOn(LocalDate date) {
         LocalDate dob1 = this.dateOfBirthFrom(date, 30);
         LocalDate dob2 = this.dateOfBirthFrom(date, 45);
-        Employee maryAnn = new Employee("Mary, Ann", dob1, "mary.ann@foobar.com");
-        Employee johnDoe = new Employee("John, Doe", dob2, "john.doe@foobar.com");
+        Employee maryAnn = new Employee("Mary", "Ann", dob1, "mary.ann@foobar.com");
+        Employee johnDoe = new Employee("John", "Doe", dob2, "john.doe@foobar.com");
+        List<GreetablePerson> listOfEmployee = new ArrayList<>();
+        listOfEmployee.add(maryAnn);
+        listOfEmployee.add(johnDoe);
+        return listOfEmployee;
+    }
+
+    public List<GreetablePerson> twoEmployeesNotBornOn(LocalDate date) {
+        LocalDate dob1 = this.dateOfBirthFrom(date.minusMonths(-1), 30);
+        LocalDate dob2 = this.dateOfBirthFrom(date.minusMonths(-3), 45);
+        Employee maryAnn = new Employee("Mary", "Ann", dob1, "mary.ann@foobar.com");
+        Employee johnDoe = new Employee("John", "Doe", dob2, "john.doe@foobar.com");
         List<GreetablePerson> listOfEmployee = new ArrayList<>();
         listOfEmployee.add(maryAnn);
         listOfEmployee.add(johnDoe);
@@ -51,8 +62,8 @@ public class BirthdayGreetingsTestObjects {
         return (query) -> {
             LocalDate dob1 = this.dateOfBirthFrom(date, 30);
             LocalDate dob2 = this.dateOfBirthFrom(date, 45);
-            Employee maryAnn = new Employee("Mary, Ann", dob1, "mary.ann@foobar.com");
-            Employee johnDoe = new Employee("John, Doe", dob2, "john.doe@foobar.com");
+            Employee maryAnn = new Employee("Mary", "Ann", dob1, "mary.ann@foobar.com");
+            Employee johnDoe = new Employee("John", "Doe", dob2, "john.doe@foobar.com");
             List<GreetablePerson> listOfEmployee = new ArrayList<>();
             listOfEmployee.add(maryAnn);
             listOfEmployee.add(johnDoe);
@@ -63,8 +74,8 @@ public class BirthdayGreetingsTestObjects {
         return (query) -> {
             LocalDate dob1 = this.dateOfBirthFrom(date.minusMonths(-1), 30);
             LocalDate dob2 = this.dateOfBirthFrom(date.minusMonths(-3), 45);
-            Employee maryAnn = new Employee("Mary, Ann", dob1, "mary.ann@foobar.com");
-            Employee johnDoe = new Employee("John, Doe", dob2, "john.doe@foobar.com");
+            Employee maryAnn = new Employee("Mary", "Ann", dob1, "mary.ann@foobar.com");
+            Employee johnDoe = new Employee("John", "Doe", dob2, "john.doe@foobar.com");
             List<GreetablePerson> listOfEmployee = new ArrayList<>();
             listOfEmployee.add(maryAnn);
             listOfEmployee.add(johnDoe);
@@ -82,10 +93,10 @@ public class BirthdayGreetingsTestObjects {
 
     public DataBaseSystem dbSystemReturnTwoEmployees() {
         return (query) -> {
-            Employee maryAnn = new Employee("Mary, Ann",
+            Employee maryAnn = new Employee("Mary", "Ann",
                     LocalDate.of(1975, Month.SEPTEMBER, 10),
                     "mary.ann@foobar.com");
-            Employee johnDoe = new Employee("John, Doe",
+            Employee johnDoe = new Employee("John", "Doe",
                     LocalDate.of(1970, Month.JANUARY, 3),
                     "john.doe@foobar.com");
             List<GreetablePerson> listOfEmployee = new ArrayList<>();

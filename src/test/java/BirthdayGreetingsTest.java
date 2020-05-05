@@ -32,27 +32,14 @@ public class BirthdayGreetingsTest {
                 this.testObjects.employeeSystemOfRecordsWithNoEmployees());
         try {
             Assert.assertEquals(greeter.greetOn(this.testObjects.today()), false);
-        } catch (Exception e) {
             Assert.fail();
+        } catch (Exception e) {
+            Assert.assertEquals(BirthdayGreeting.THERE_ARE_NOT_EMPLOYEES_TO_GREET, e.getMessage());
         }
     }
 
     @Test
-    public void test02_whenEmployeeMonthAndDayAreDifferentFromTodayNoneGreetingsIsSent() {
-        BirthdayGreeting greeter = new BirthdayGreeting(
-                this.testObjects.successEmailSystemWithFalse(),
-                this.testObjects.employeeSystemOfRecordsWithTwoEmployeeNotBornOn(this.testObjects.today()));
-        try {
-            Assert.assertEquals(greeter.greetOn(this.testObjects.today()), false);
-        } catch (Exception e) {
-            Assert.fail();
-        }
-
-    }
-
-
-    @Test
-    public void test03_whenEmployeeDateOfBirthMonthAndDayMatchesWithTodayAGreetingIsSent() {
+    public void test02_whenEmployeeDateOfBirthMonthAndDayMatchesWithTodayAGreetingIsSent() {
         BirthdayGreeting greeter = new BirthdayGreeting(
                 this.testObjects.successEmailSystemWithTrue(),
                 this.testObjects.employeeSystemOfRecordsWithTwoEmployeeBornOn(this.testObjects.today()));
@@ -65,7 +52,7 @@ public class BirthdayGreetingsTest {
     }
 
     @Test
-    public void test04_whenEmailSystemFailedThenGreeterContinueSendingAndSomeEmailsAreNotBeingSent() {
+    public void test03_whenEmailSystemFailedThenGreeterContinueSendingAndSomeEmailsAreNotBeingSent() {
         BirthdayGreeting greeter = new BirthdayGreeting(
                 this.testObjects.failEmailSystem(),
                 this.testObjects.employeeSystemOfRecordsWithTwoEmployeeBornOn(this.testObjects.today()));

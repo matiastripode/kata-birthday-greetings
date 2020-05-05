@@ -18,7 +18,7 @@ public class HappyBirthdayEmailSystemTest {
         HappyBirthdayEmailSystem emailSystem = new HappyBirthdayEmailSystem();
         String emailSubject = "Happy birthday!";
         String emailBody = "";
-        HappyBirthdayEmail email = new HappyBirthdayEmail(emailSubject, emailBody, new Employee("Diego, Maradona", null, ""));
+        HappyBirthdayEmail email = new HappyBirthdayEmail(emailSubject, emailBody, new Employee("Diego", "Maradona", null, ""));
 
         try {
             boolean result = emailSystem.sendEmail(email);
@@ -48,7 +48,7 @@ public class HappyBirthdayEmailSystemTest {
     @Test
     public void test03_whenEmailHasValidReceiverSubjectAndBodyThenEmailIsSent() {
         HappyBirthdayEmailSystem emailSystem = new HappyBirthdayEmailSystem();
-        Employee employee = new Employee("John, Doe", null, "john.doe@foobar.com");
+        Employee employee = new Employee("John", "Doe", null, "john.doe@foobar.com");
         HappyBirthdayEmail email = HappyBirthdayEmail.composeHappyBirthdayEmail(employee);
         try {
             Assert.assertEquals(emailSystem.sendEmail(email), true);

@@ -4,8 +4,9 @@ TDD Kata in Java inspired by [Matteo Vaccari](http://matteo.vaccari.name/blog/ar
 
 1. I implemented it following [baby steps](http://codingdojo.org/BabySteps/) 
 2. Of course using the TDD cycle: Red ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) --> Green ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) --> Refactor
-3. Approach to write functional tests for TDD. Here is a [diagram](https://drive.google.com/file/d/1ZWTPnbqD1Yd9sAabjmCP2TM_KA5Xla7j/view?usp=sharing) showing how tests interacts only with Domain Objects and never with external dependencies.
-## On Object Oriented Design
+3. My approach to write functional tests for TDD can be found here is a [diagram](https://drive.google.com/file/d/1ZWTPnbqD1Yd9sAabjmCP2TM_KA5Xla7j/view?usp=sharing) showing how tests interacts only with Domain Objects and never with external dependencies.
+
+## Object Oriented Design and other heuristics
 TDD does not mean you will end up with a good design. A good designer will likely come up with a good design. That said, I've listed couple of heurists:
 
 1. Avoid usage of null, instead use Null Object pattern (you can see this on class ```NullEmployee ```).

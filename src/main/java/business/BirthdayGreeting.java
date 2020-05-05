@@ -1,4 +1,5 @@
 package business;
+import infrastructure.EmployeeSystem;
 import infrastructure.EmailSystem;
 
 import java.time.LocalDate;
@@ -10,17 +11,39 @@ import java.util.List;
 public class BirthdayGreeting {
     public static final  String ERROR_SOME_EMAILS_FAILED = "Error some emails were not sent.";
     private final EmailSystem emailSystem;
+    private final EmployeeSystem employeeSystemOfRecords;
     private List<FailedEmail> failedEmails;
 
 
-    public BirthdayGreeting(EmailSystem emailSystem){
+    public BirthdayGreeting(EmailSystem emailSystem, EmployeeSystem employeeSystemOfRecords){
         this.emailSystem = emailSystem;
+        this.employeeSystemOfRecords = employeeSystemOfRecords;
         this.failedEmails = new ArrayList<>();
     }
 
 
-    public boolean greetOn(LocalDate today, List<GreetablePerson> employees) throws Exception {
-        MonthDay yearMonth = MonthDay.from(today);
+    public boolean greetOn(LocalDate date) throws Exception {
+        List<GreetablePerson> employees = this.employeeSystemOfRecords.findEmployeesBornOn(date);
+        return this.greetOn(date, employees);
+    }
+
+    public boolean emailWereSentFor(List<GreetablePerson> employees) {
+        List<GreetablePerson> foundsInFailedEmails = new ArrayList<>();
+        for (GreetablePerson person: employees) {
+            for (FailedEmail failed: this.failedEmails) {
+                if (failed.getReceiverName().equalsIgnoreCase(person.getName())) {
+                    foundsInFailedEmails.add(person);
+                }
+            }
+        }
+        return foundsInFailedEmails.size() == 0;
+    }
+
+    /**
+     * PRIVATE
+     * */
+    private boolean greetOn(LocalDate aDate, List<GreetablePerson> employees) throws Exception {
+        MonthDay yearMonth = MonthDay.from(aDate);
 
         this.failedEmails = new ArrayList<>();
         if (employees.size() == 0) {
@@ -41,18 +64,6 @@ public class BirthdayGreeting {
         this.failedEmails = sendEmailsAndTrackFailures(toGreet, this.failedEmails);
         return returnOrThrow(this.failedEmails);
 
-    }
-
-    public boolean emailWereSentFor(List<GreetablePerson> employees) {
-        List<GreetablePerson> foundsInFailedEmails = new ArrayList<>();
-        for (GreetablePerson person: employees) {
-            for (FailedEmail failed: this.failedEmails) {
-                if (failed.getReceiverName() == person.getName()) {
-                    foundsInFailedEmails.add(person);
-                }
-            }
-        }
-        return foundsInFailedEmails.size() == 0;
     }
 
     private List<FailedEmail> sendEmailsAndTrackFailures(List<GreetablePerson> toGreet, List<FailedEmail> failedEmails) {

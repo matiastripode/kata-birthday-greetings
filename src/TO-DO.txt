@@ -3,6 +3,7 @@ Note: this to-do list will likely be tracked in a tracking system (e.g: Jira).
 TO-DO:
 1) In business.BirthdayGreeting improve readability of method greetOn
 4) business.Employee constructor contains dangerous code (it needs to be refactored)
+5) In business.BirthdayGreeting  method sendEmailsAndTrackFailures is also composing the email. It should refactored.
 
 DONE:
 2) In infrastructure.HappyBirthdayEmailSystem refactor static method composeHappyBirthdayEmail

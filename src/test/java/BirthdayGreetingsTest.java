@@ -27,10 +27,11 @@ public class BirthdayGreetingsTest {
     @Test
     public void test01_whenThereAreNotEmployeesNoneGreetingsIsSent() {
         List<GreetablePerson> employees = new ArrayList<>();
-        BirthdayGreeting greeter = new BirthdayGreeting(new HappyBirthdayEmailSystem());
-
+        BirthdayGreeting greeter = new BirthdayGreeting(
+                new HappyBirthdayEmailSystem(),
+                this.testObjects.employeeSystemOfRecordsWithNoEmployees());
         try {
-            Assert.assertEquals(greeter.greetOn(this.testObjects.today(), employees), false);
+            Assert.assertEquals(greeter.greetOn(this.testObjects.today()), false);
         } catch (Exception e) {
             Assert.fail();
         }
@@ -38,14 +39,11 @@ public class BirthdayGreetingsTest {
 
     @Test
     public void test02_whenEmployeeMonthAndDayAreDifferentFromTodayNoneGreetingsIsSent() {
-        List<GreetablePerson> employees = new ArrayList<>();
-        LocalDate dateOfBirth = LocalDate.of(1980, Month.MARCH, 4);
-        Employee employee = new Employee("Juan, Perez", dateOfBirth, "juan.perez@foobar.com" );
-        employees.add(employee);
-
-        BirthdayGreeting greeter = new BirthdayGreeting(this.testObjects.successEmailSystemWithFalse());
+        BirthdayGreeting greeter = new BirthdayGreeting(
+                this.testObjects.successEmailSystemWithFalse(),
+                this.testObjects.employeeSystemOfRecordsWithTwoEmployeeNotBornOn(this.testObjects.today()));
         try {
-            Assert.assertEquals(greeter.greetOn(this.testObjects.today(), employees), false);
+            Assert.assertEquals(greeter.greetOn(this.testObjects.today()), false);
         } catch (Exception e) {
             Assert.fail();
         }
@@ -55,14 +53,12 @@ public class BirthdayGreetingsTest {
 
     @Test
     public void test03_whenEmployeeDateOfBirthMonthAndDayMatchesWithTodayAGreetingIsSent() {
-        List<GreetablePerson> employees = new ArrayList<>();
-        LocalDate dateOfBirth = this.testObjects.dateOfBirthFrom(this.testObjects.today(), 30);
-        Employee employee = new Employee("Juan, Perez", dateOfBirth, "juan.perez@foobar.com" );
-        employees.add(employee);
-        BirthdayGreeting greeter = new BirthdayGreeting(this.testObjects.successEmailSystemWithTrue());
+        BirthdayGreeting greeter = new BirthdayGreeting(
+                this.testObjects.successEmailSystemWithTrue(),
+                this.testObjects.employeeSystemOfRecordsWithTwoEmployeeBornOn(this.testObjects.today()));
 
         try {
-            Assert.assertEquals(greeter.greetOn(this.testObjects.today(), employees), true);
+            Assert.assertEquals(greeter.greetOn(this.testObjects.today()), true);
         }   catch (Exception e) {
             Assert.fail();
         }
@@ -70,20 +66,15 @@ public class BirthdayGreetingsTest {
 
     @Test
     public void test04_whenEmailSystemFailedThenGreeterContinueSendingAndSomeEmailsAreNotBeingSent() {
-        List<GreetablePerson> employees = new ArrayList<>();
-        LocalDate dateOfBirth = this.testObjects.dateOfBirthFrom(this.testObjects.today(), 30);
-        Employee juanPerez = new Employee("Juan, Perez", dateOfBirth, "juan.perez@foobar.com" );
-        Employee pepeSanchez = new Employee("Pepe, Sanchez", dateOfBirth , "pepe.sanchez@foobar.com");
-        employees.add(juanPerez);
-        employees.add(pepeSanchez);
-
-        BirthdayGreeting greeter = new BirthdayGreeting(this.testObjects.failEmailSystem());
+        BirthdayGreeting greeter = new BirthdayGreeting(
+                this.testObjects.failEmailSystem(),
+                this.testObjects.employeeSystemOfRecordsWithTwoEmployeeBornOn(this.testObjects.today()));
         try {
-            greeter.greetOn(this.testObjects.today(), employees);
+            greeter.greetOn(this.testObjects.today());
             Assert.fail();
         } catch (Exception e) {
             Assert.assertEquals(BirthdayGreeting.ERROR_SOME_EMAILS_FAILED, e.getMessage());
-            Assert.assertFalse(greeter.emailWereSentFor(employees));
+            Assert.assertFalse(greeter.emailWereSentFor(this.testObjects.twoEmployeesBornOn(this.testObjects.today())));
         }
     }
 

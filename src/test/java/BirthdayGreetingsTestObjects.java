@@ -3,6 +3,7 @@ import business.Employee;
 import business.GreetablePerson;
 import infrastructure.DataBaseSystem;
 import infrastructure.EmailSystem;
+import infrastructure.EmployeeSystem;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -33,6 +34,46 @@ public class BirthdayGreetingsTestObjects {
 
     public EmailSystem successEmailSystemWithFalse() {
         return (email) -> {return false;};
+    }
+
+    public List<GreetablePerson> twoEmployeesBornOn(LocalDate date) {
+        LocalDate dob1 = this.dateOfBirthFrom(date, 30);
+        LocalDate dob2 = this.dateOfBirthFrom(date, 45);
+        Employee maryAnn = new Employee("Mary, Ann", dob1, "mary.ann@foobar.com");
+        Employee johnDoe = new Employee("John, Doe", dob2, "john.doe@foobar.com");
+        List<GreetablePerson> listOfEmployee = new ArrayList<>();
+        listOfEmployee.add(maryAnn);
+        listOfEmployee.add(johnDoe);
+        return listOfEmployee;
+    }
+
+    public EmployeeSystem employeeSystemOfRecordsWithTwoEmployeeBornOn(LocalDate date) {
+        return (query) -> {
+            LocalDate dob1 = this.dateOfBirthFrom(date, 30);
+            LocalDate dob2 = this.dateOfBirthFrom(date, 45);
+            Employee maryAnn = new Employee("Mary, Ann", dob1, "mary.ann@foobar.com");
+            Employee johnDoe = new Employee("John, Doe", dob2, "john.doe@foobar.com");
+            List<GreetablePerson> listOfEmployee = new ArrayList<>();
+            listOfEmployee.add(maryAnn);
+            listOfEmployee.add(johnDoe);
+            return listOfEmployee;
+        };
+    }
+    public EmployeeSystem employeeSystemOfRecordsWithTwoEmployeeNotBornOn(LocalDate date) {
+        return (query) -> {
+            LocalDate dob1 = this.dateOfBirthFrom(date.minusMonths(-1), 30);
+            LocalDate dob2 = this.dateOfBirthFrom(date.minusMonths(-3), 45);
+            Employee maryAnn = new Employee("Mary, Ann", dob1, "mary.ann@foobar.com");
+            Employee johnDoe = new Employee("John, Doe", dob2, "john.doe@foobar.com");
+            List<GreetablePerson> listOfEmployee = new ArrayList<>();
+            listOfEmployee.add(maryAnn);
+            listOfEmployee.add(johnDoe);
+            return listOfEmployee;
+        };
+    }
+
+    public EmployeeSystem employeeSystemOfRecordsWithNoEmployees() {
+        return (query) -> new ArrayList<>();
     }
 
     public DataBaseSystem dbSystemReturnEmpty() {

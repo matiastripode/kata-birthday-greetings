@@ -2,9 +2,10 @@ package infrastructure;
 import business.GreetablePerson;
 import business.NullEmployee;
 
+import java.time.LocalDate;
 import java.util.List;
 
-public class EmployeeSystemOfRecord {
+public class EmployeeSystemOfRecord implements EmployeeSystem {
     private final DataBaseSystem database;
 
     public EmployeeSystemOfRecord(DataBaseSystem db) {
@@ -18,5 +19,10 @@ public class EmployeeSystemOfRecord {
             }
         }
         return new NullEmployee();
+    }
+
+    @Override
+    public List<GreetablePerson> findEmployeesBornOn(LocalDate date) {
+        return null;
     }
 }

@@ -8,15 +8,16 @@ TDD Kata in Java inspired by [Matteo Vaccari](http://matteo.vaccari.name/blog/ar
 ## On Object Oriented Design
 TDD does not mean you will end up with a good design. A good designer will likely come up with a good design. That said, I've listed couple of heurists:
 
-1. Avoid usage of null, instead use Null Object pattern (you can this on class ```NullEmployee ```).
+1. Avoid usage of null, instead use Null Object pattern (you can see this on class ```NullEmployee ```).
 
 2. Always refactor with all tests in Green ![#c5f015](https://placehold.it/15/c5f015/000000?text=+).
 
-3. Always run all tests when you're refatoring.
+3. Always ***run all tests*** when you're refatoring.
 
-4. Test should have fully control of everything (time, date, test data, etc). Please check class ```BirthdayGreetingsTestObjects```.
+4. Test should have full control of everything (time, date, test data, etc). Please check class ```BirthdayGreetingsTestObjects``` and how it is used on Tests.
 
-5. Never hardcode today() or any time/date inside your classes. It is better to pass it as parameter. Please check method ```greetOn(LocalDate date)``` in class ```BirthdayGreeting``` 
+5. Never hardcode today() or any time/date inside your classes. It is better to pass it as parameter. Please check method ```greetOn(LocalDate date)``` in class ```BirthdayGreeting``` . Even test objects you can make them flexible on time/date like
+method ```employeeSystemOfRecordsWithTwoEmployeeBornOn(LocalDate date) ```
 
 6. Pass dependencies in constructors.  Please check constructor ```BirthdayGreeting(EmailSystem emailSystem, EmployeeSystem employeeSystemOfRecords)```
 
@@ -35,6 +36,15 @@ TDD does not mean you will end up with a good design. A good designer will likel
 public EmailSystem successEmailSystemWithTrue() { return (email) -> {return true;}; }
 public EmailSystem successEmailSystemWithFalse() { return (email) -> {return false;}; }
 ```
+10. Avoid naming classes like ```YYYManager```, ```YYYController```, ```EmployeeValidator```, 
+
+11. You will get the most of TDD if you create **functional tests** (not unit tests nor integration tests).
+ - Unit tests are very fine grained (e.g: EmployeeTest where you will test only Employee class isoleted). 
+ - Integration tests depend on I/O and usually are quite slow and unpredictable. 
+ 
+ Both (unit and integration tests) could be important for your project, but they are not part of pure hardcore TDD :-)
+
+12. Rember a good developer is also a good tester. Be proffesional and responsible, always develop robust software following best practices. It will save you time, headaches, pager duties, issues in production, etc.
 
 ## Be in the zone
 - Music to keep you in the zone [radio de x-team](https://radio.x-team.com/)
@@ -46,7 +56,8 @@ public EmailSystem successEmailSystemWithFalse() { return (email) -> {return fal
 ### In Spanish
 - [Diseño ágil con TDD](https://uniwebsidad.com/libros/tdd)
 - [10 Pines University](https://university.10pines.com/webinars_and_videos)
-
+- [Implementando Exception en Ruby](https://www.youtube.com/watch?v=nlvCYJodigM&list=PLMkq_h36PcLA4yY58tQgj5FAXRzMaZAaY)
+- [Aprendiendo Smalltak](https://www.youtube.com/watch?v=blj7itWxk2Y&list=PLMkq_h36PcLCtLKrrdOKKFV2r267VFH_t)
 ## Authors
 
 * **Matias Tripode** - [My profile on Linkedin](https://www.linkedin.com/in/matiastripode/) and [on twitter](https://twitter.com/TripodeMatias)

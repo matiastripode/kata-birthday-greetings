@@ -1,0 +1,4 @@
+TO-DO:
+1) In BirthdayGreeting improve readability of method greetOn
+2) In HappyBirthdayEmailSystem refactor static method composeHappyBirthdayEmail
+3) In HappyBirthdayEmailSystem refactor static method bodyComposer

@@ -1,3 +1,5 @@
+package business;
+import infrastructure.EmailSystem;
 
 import java.time.LocalDate;
 import java.time.MonthDay;
@@ -5,18 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class FailedEmail {
-    public String getReceiverName(){ return this.email.receiver.getName(); }
-
-    private final HappyBirthdayEmail email;
-    private final Exception exception;
-
-    FailedEmail(HappyBirthdayEmail email, Exception exception) {
-        this.email = email;
-        this.exception = exception;
-    }
-
-}
 public class BirthdayGreeting {
     public static final  String ERROR_SOME_EMAILS_FAILED = "Error some emails were not sent.";
     private final EmailSystem emailSystem;
@@ -90,6 +80,6 @@ public class BirthdayGreeting {
     }
 
     private HappyBirthdayEmail buildEmail(GreetablePerson employee) {
-        return HappyBirthdayEmailSystem.composeHappyBirthdayEmail(employee);
+        return HappyBirthdayEmail.composeHappyBirthdayEmail(employee);
     }
 }

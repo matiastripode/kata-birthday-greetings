@@ -1,3 +1,8 @@
+package infrastructure;
+
+import business.GreetablePerson;
+import business.HappyBirthdayEmail;
+import business.NullEmployee;
 import org.apache.commons.lang3.StringUtils;
 
 public class HappyBirthdayEmailSystem implements EmailSystem {
@@ -20,16 +25,6 @@ public class HappyBirthdayEmailSystem implements EmailSystem {
     public boolean sendEmail(HappyBirthdayEmail email) throws Exception {
         this.lastEmailWasSent = this.sendEmail(email.subject, email.body, email.receiver);
         return this.lastEmailWasSent;
-    }
-
-    public static HappyBirthdayEmail composeHappyBirthdayEmail(GreetablePerson employee) {
-        String emailSubject = "Happy birthday!";
-        String emailBody = HappyBirthdayEmailSystem.bodyComposer(employee.getName());
-        return new HappyBirthdayEmail(emailSubject, emailBody, employee);
-    }
-
-    private static String bodyComposer(String name) {
-        return " Happy birthday, dear " + name + "!";
     }
 
     private boolean sendEmail(String emailSubject, String emailBody, GreetablePerson person) throws Exception {

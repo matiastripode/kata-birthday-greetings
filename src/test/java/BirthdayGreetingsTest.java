@@ -1,4 +1,8 @@
 
+import business.BirthdayGreeting;
+import business.Employee;
+import business.GreetablePerson;
+import infrastructure.HappyBirthdayEmailSystem;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +40,7 @@ public class BirthdayGreetingsTest {
     public void test02_whenEmployeeMonthAndDayAreDifferentFromTodayNoneGreetingsIsSent() {
         List<GreetablePerson> employees = new ArrayList<>();
         LocalDate dateOfBirth = LocalDate.of(1980, Month.MARCH, 4);
-        Employee employee = new Employee("Juan Perez", dateOfBirth );
+        Employee employee = new Employee("Juan, Perez", dateOfBirth, "juan.perez@foobar.com" );
         employees.add(employee);
 
         BirthdayGreeting greeter = new BirthdayGreeting(this.testObjects.successEmailSystemWithFalse());
@@ -53,7 +57,7 @@ public class BirthdayGreetingsTest {
     public void test03_whenEmployeeDateOfBirthMonthAndDayMatchesWithTodayAGreetingIsSent() {
         List<GreetablePerson> employees = new ArrayList<>();
         LocalDate dateOfBirth = this.testObjects.dateOfBirthFrom(this.testObjects.today(), 30);
-        Employee employee = new Employee("Juan Perez", dateOfBirth );
+        Employee employee = new Employee("Juan, Perez", dateOfBirth, "juan.perez@foobar.com" );
         employees.add(employee);
         BirthdayGreeting greeter = new BirthdayGreeting(this.testObjects.successEmailSystemWithTrue());
 
@@ -68,8 +72,8 @@ public class BirthdayGreetingsTest {
     public void test04_whenEmailSystemFailedThenGreeterContinueSendingAndSomeEmailsAreNotBeingSent() {
         List<GreetablePerson> employees = new ArrayList<>();
         LocalDate dateOfBirth = this.testObjects.dateOfBirthFrom(this.testObjects.today(), 30);
-        Employee juanPerez = new Employee("Juan Perez", dateOfBirth );
-        Employee pepeSanchez = new Employee("Pepe Sanchez", dateOfBirth );
+        Employee juanPerez = new Employee("Juan, Perez", dateOfBirth, "juan.perez@foobar.com" );
+        Employee pepeSanchez = new Employee("Pepe, Sanchez", dateOfBirth , "pepe.sanchez@foobar.com");
         employees.add(juanPerez);
         employees.add(pepeSanchez);
 

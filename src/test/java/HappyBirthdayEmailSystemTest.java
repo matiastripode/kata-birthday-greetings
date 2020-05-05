@@ -1,5 +1,8 @@
+import business.Employee;
+import business.HappyBirthdayEmail;
+import business.NullEmployee;
+import infrastructure.HappyBirthdayEmailSystem;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class HappyBirthdayEmailSystemTest {
@@ -15,7 +18,7 @@ public class HappyBirthdayEmailSystemTest {
         HappyBirthdayEmailSystem emailSystem = new HappyBirthdayEmailSystem();
         String emailSubject = "Happy birthday!";
         String emailBody = "";
-        HappyBirthdayEmail email = new HappyBirthdayEmail(emailSubject, emailBody, new Employee("", null));
+        HappyBirthdayEmail email = new HappyBirthdayEmail(emailSubject, emailBody, new Employee("Diego, Maradona", null, ""));
 
         try {
             boolean result = emailSystem.sendEmail(email);
@@ -31,7 +34,7 @@ public class HappyBirthdayEmailSystemTest {
         HappyBirthdayEmailSystem emailSystem = new HappyBirthdayEmailSystem();
         NullEmployee nullEmployee = new NullEmployee();
 
-        HappyBirthdayEmail email = HappyBirthdayEmailSystem.composeHappyBirthdayEmail(nullEmployee);
+        HappyBirthdayEmail email = HappyBirthdayEmail.composeHappyBirthdayEmail(nullEmployee);
 
         try {
             boolean result = emailSystem.sendEmail(email);
@@ -45,8 +48,8 @@ public class HappyBirthdayEmailSystemTest {
     @Test
     public void test03_whenEmailHasValidReceiverSubjectAndBodyThenEmailIsSent() {
         HappyBirthdayEmailSystem emailSystem = new HappyBirthdayEmailSystem();
-        Employee employee = new Employee("John", null);
-        HappyBirthdayEmail email = HappyBirthdayEmailSystem.composeHappyBirthdayEmail(employee);
+        Employee employee = new Employee("John, Doe", null, "john.doe@foobar.com");
+        HappyBirthdayEmail email = HappyBirthdayEmail.composeHappyBirthdayEmail(employee);
         try {
             Assert.assertEquals(emailSystem.sendEmail(email), true);
         } catch (Exception e){

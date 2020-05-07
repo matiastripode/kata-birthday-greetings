@@ -1,3 +1,5 @@
+package functionaltests;
+
 import business.Employee;
 import business.HappyBirthdayEmail;
 import business.NullEmployee;

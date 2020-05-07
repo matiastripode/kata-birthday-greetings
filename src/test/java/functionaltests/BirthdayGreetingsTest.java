@@ -1,6 +1,6 @@
+package functionaltests;
 
 import business.BirthdayGreeting;
-import business.Employee;
 import business.GreetablePerson;
 import infrastructure.HappyBirthdayEmailSystem;
 import org.junit.Assert;
@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.*;
 
 public class BirthdayGreetingsTest {

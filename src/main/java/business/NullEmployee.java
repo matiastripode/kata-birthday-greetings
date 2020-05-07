@@ -11,7 +11,7 @@ public class NullEmployee implements GreetablePerson {
 
     @Override
     public LocalDate getDateOfBirth() {
-        return null;
+        return LocalDate.of(1, 1, 1);
     }
 
     @Override

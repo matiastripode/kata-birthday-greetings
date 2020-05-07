@@ -1,3 +1,5 @@
+package functionaltests;
+
 import business.BirthdayGreeting;
 import business.Employee;
 import business.GreetablePerson;
